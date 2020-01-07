@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dpl-test
+  namespace: sit2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+      - args:
+        - /bin/bash
+        - init
+        env:
+        - name: env
+          value: value
+        name: test
+        image: harishgopi/nginx
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+
